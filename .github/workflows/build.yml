@@ -15,7 +15,8 @@ on:
 jobs:
   build:
     name: Build Magisk artifacts
-    runs-on: macos-15
+    #runs-on: macos-15
+    runs-on: self-hosted
     strategy:
       fail-fast: false
     steps:
@@ -58,7 +59,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2025, ubuntu-24.04]
+        #os: [windows-2025, ubuntu-24.04]
+        os: [ubuntu-22.04]
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -76,7 +78,8 @@ jobs:
 
   avd-test:
     name: Test API ${{ matrix.version }} (x86_64)
-    runs-on: ubuntu-24.04
+    #runs-on: ubuntu-24.04
+    runs-on: self-hosted
     needs: build
     if: ${{ github.event_name != 'push' }}
     strategy:
@@ -121,7 +124,8 @@ jobs:
 
   avd-test-32:
     name: Test API ${{ matrix.version }} (x86)
-    runs-on: ubuntu-24.04
+    #runs-on: ubuntu-24.04
+    runs-on: self-hosted
     needs: build
     if: ${{ github.event_name != 'push' }}
     strategy:
@@ -163,7 +167,8 @@ jobs:
 
   cf-test:
     name: Test ${{ matrix.device }}
-    runs-on: ubuntu-24.04
+    #runs-on: ubuntu-24.04
+    runs-on: self-hosted
     needs: build
     if: ${{ github.event_name != 'push' }}
     env:
